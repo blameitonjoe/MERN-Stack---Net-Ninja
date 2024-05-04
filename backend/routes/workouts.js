@@ -1,9 +1,10 @@
 const express = require('express');
+const Workout = require('../models/workoutModel')
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.json({ message: "GET all workouts" })
+    res.json({ message: "GET a single workout" })
 })
 
 router.get('/:id', (req, res) => {
