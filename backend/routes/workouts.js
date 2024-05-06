@@ -11,8 +11,15 @@ router.get('/:id', (req, res) => {
     res.json({ message: "GET a single workout" })
 })
 
-router.post('/', (req, res) => {
-    res.json({ message: "POST a new workout" })
+router.post('/', async (req, res) => {
+    const {title,load,reps}   = req.body
+    try {
+        const newWorkout = await Workout.create({title:title,load:load,reps:reps})
+        res.status(200).json(newWorkout)
+    } catch (error) {
+        console.log(error.message);
+        res.status(400).json({error:error.message})
+    }
 })
 
 router.delete('/:id', (req, res) => {
