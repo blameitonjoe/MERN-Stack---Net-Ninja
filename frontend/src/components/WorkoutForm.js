@@ -1,0 +1,77 @@
+import { useState } from "react";
+
+const WorkoutForm = () => {
+  const [workoutData, setWorkoutData] = useState({
+    title: "",
+    reps: "",
+    load: "",
+  });
+  const [error, setError] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/workouts", {
+      method: "POST",
+      body: JSON.stringify(workoutData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      setError(null);
+      console.log("New workout added!");
+      setWorkoutData({ title: "", reps: "", load: "" });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="create">
+      <h3>Add a new workout</h3>
+      <label htmlFor="title">Exercise Title</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        onChange={(e) =>
+          setWorkoutData((x) => {
+            return { ...workoutData, title: e.target.value };
+          })
+        }
+        value={workoutData.title}
+      />
+      <label htmlFor="load">Load (kg)</label>
+      <input
+        type="number"
+        name="load"
+        id="load"
+        onChange={(e) =>
+          setWorkoutData((x) => {
+            return { ...workoutData, load: e.target.value };
+          })
+        }
+        value={workoutData.load}
+      />
+      <label htmlFor="reps">Reps</label>
+      <input
+        type="number"
+        name="reps"
+        id="reps"
+        onChange={(e) =>
+          setWorkoutData((x) => {
+            return { ...workoutData, reps: e.target.value };
+          })
+        }
+        value={workoutData.reps}
+      />
+      <button type="submit">Add Workout</button>
+      {error && <h4 className="error">{error}</h4>}
+    </form>
+  );
+};
+
+export default WorkoutForm;

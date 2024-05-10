@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 //Components
 import WorkoutDetails from "../components/WorkoutDetails";
+import WorkoutForm from "../components/WorkoutForm";
 
 function Home() {
   const [workouts, setWorkouts] = useState(null);
@@ -26,6 +27,7 @@ function Home() {
             return <WorkoutDetails key={workout.id} workout={workout} />;
           })}
       </div>
+      <WorkoutForm key={3} />
     </div>
   );
 }
