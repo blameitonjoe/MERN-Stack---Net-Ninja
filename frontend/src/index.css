@@ -89,10 +89,10 @@ form button {
   border-radius: 4px;
   cursor: pointer;
 }
-div.error {
+p.error {
   padding: 10px;
   background: #ffefef;
-  border: 1px solid var(--error);
+  border: 1px dotted var(--error);
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;

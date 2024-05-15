@@ -1,4 +1,5 @@
 import useWorkoutsContext from "../hooks/useWorkoutsContext";
+import { format } from "date-fns";
 
 const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
@@ -24,8 +25,11 @@ const WorkoutDetails = ({ workout }) => {
         <strong>Reps: </strong>
         {workout.reps}
       </p>
-      <p>{workout.createdAt}</p>
-      <span onClick={handleClick}>Delete</span>
+      <p>{format(new Date(workout.createdAt), "d-MMM-yyyy")}</p>
+
+      <span onClick={handleClick} className="material-symbols-outlined">
+        Delete
+      </span>
     </div>
   );
 };

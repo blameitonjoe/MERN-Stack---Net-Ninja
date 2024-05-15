@@ -76,7 +76,7 @@ const WorkoutForm = () => {
         value={workoutData.reps}
       />
       <button type="submit">Add Workout</button>
-      {error && <h4 className="error">{error.errorMessage}</h4>}
+      {error && <p className="error">{error.errorMessage}</p>}
     </form>
   );
 };
