@@ -33,10 +33,19 @@ header a {
 }
 
 /* homepage */
-.home {
+/* .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
+} */
+.home {
+  display: flex;
+  gap: 10%;
+  margin: 0 20px;
+}
+.workouts {
+  flex-grow: 1;
+  min-width: 200px;
 }
 .workout-details {
   background: #fff;
@@ -68,6 +77,10 @@ header a {
 }
 
 /* new workout form */
+form.create {
+  min-width: 185px;
+  flex-shrink: 0;
+}
 label, input {
   display: block;
 }
@@ -88,6 +101,7 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+  display: block;
 }
 p.error {
   padding: 10px;
@@ -99,4 +113,19 @@ p.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+
+@media (max-width: 500px) {
+  .home{
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  form.create {
+    order: -1;
+    flex-grow: 1;
+    margin-bottom: 50px;
+  }
+  form.create button{
+    margin: 0 auto;
+  }
 }

@@ -30,7 +30,7 @@ function Home() {
             return <WorkoutDetails key={workout._id} workout={workout} />;
           })}
       </div>
-      <WorkoutForm key={3} />
+      <WorkoutForm />
     </div>
   );
 }
