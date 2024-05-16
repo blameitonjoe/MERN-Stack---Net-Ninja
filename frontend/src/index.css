@@ -5,9 +5,10 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  --background: #f1f1f1;
 }
 body {
-  background: #f1f1f1;
+  background: var(--background);
   margin: 0;
   font-family: "Poppins";
 }
@@ -42,10 +43,21 @@ header a {
   display: flex;
   gap: 10%;
   margin: 0 20px;
+  height: 100vh;
 }
 .workouts {
   flex-grow: 1;
   min-width: 200px;
+  height: 100vh;
+}
+form.create {
+  min-width: 185px;
+  flex-shrink: 0;
+  position: sticky;
+  height: 180px;
+  top: 0;
+  z-index: 20;
+  background-color: var(--background);
 }
 .workout-details {
   background: #fff;
@@ -77,10 +89,7 @@ header a {
 }
 
 /* new workout form */
-form.create {
-  min-width: 185px;
-  flex-shrink: 0;
-}
+
 label, input {
   display: block;
 }
@@ -116,14 +125,30 @@ input.error {
 }
 
 @media (max-width: 500px) {
+  .pages{
+    padding: 0;
+  }
   .home{
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-direction: column;
     margin: 0;
+    height: 100vh;
+    gap: 0;
+  }
+  .home>*{
+    padding: 0 20px;
+  }
+  .workouts{
+    order: 2;
+    height: auto;
+    flex-grow: unset;
   }
   form.create {
-    order: -1;
-    flex-grow: 1;
-    margin-bottom: 50px;
+    order: 1;
+    height: 380px;
+    padding: 25px 20px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+
   }
   form.create button{
     margin: 0 auto;
