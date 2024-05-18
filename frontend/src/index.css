@@ -4,7 +4,10 @@
 /* layout */
 :root {
   --primary: #1aac83;
+  --warning: #f49b00;
+  --warning-soft: #ffedcd;
   --error: #e7195a;
+  --error-soft: #f5d4df;
   --background: #f1f1f1;
 }
 body {
@@ -67,10 +70,16 @@ form.create {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
+.workout-details.shaded {
+  background: #d3d3d3;
+}
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
+}
+.workout-details.shaded h4 {
+  color: unset;
 }
 .workout-details p {
   margin: 0;
@@ -79,13 +88,39 @@ form.create {
 }
 .workout-details span {
   position: absolute;
-  top: 20px;
   right: 20px;
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
   border-radius: 50%;
   color: #333;
+}
+.workout-details span.delete {
+  top: 20px;
+}
+.workout-details span.edit {
+  top: 65px;
+}
+.workout-details span.close {
+  top: 65px;
+  color: var(--error);
+  background-color: var(--error-soft);
+}
+.workout-details.shaded span.delete ,
+.workout-details.shaded span.edit ,
+.workout-details.shaded span.delete:hover ,
+.workout-details.shaded span.edit:hover {
+  color: #a1a1a1;
+  cursor: default;
+  background-color: unset;
+}
+.workout-details span.delete:hover {
+  color: var(--error);
+  background-color: var(--error-soft);
+}
+.workout-details span.edit:hover {
+  color: var(--warning);
+  background-color: var(--warning-soft);
 }
 
 /* new workout form */

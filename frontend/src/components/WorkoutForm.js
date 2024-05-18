@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useWorkoutsContext from "../hooks/useWorkoutsContext";
-const WorkoutForm = () => {
+const WorkoutForm = ({ editingState, updateEditingState }) => {
   const [workoutData, setWorkoutData] = useState({
     title: "",
     reps: "",
@@ -10,9 +10,52 @@ const WorkoutForm = () => {
 
   const { dispatch } = useWorkoutsContext();
 
+  const isEditing = Boolean(editingState && editingState._id);
+
+  useEffect(() => {
+    if (isEditing) {
+      setWorkoutData({ ...editingState });
+    } else {
+      setWorkoutData({
+        title: "",
+        reps: "",
+        load: "",
+      });
+    }
+  }, [editingState, isEditing]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Make PATCH request
+    if (isEditing) {
+      const response = await fetch("/api/workouts/" + workoutData._id, {
+        method: "PATCH",
+        body: JSON.stringify(workoutData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const json = await response.json();
+      if (!response.ok) {
+        setError(json);
+      }
+      if (response.ok) {
+        setError(null);
+        console.log(`Workout "${workoutData.title}" updated!`, json);
+        dispatch({ type: "UPDATE_WORKOUT", payload: workoutData });
+        setWorkoutData({ title: "", reps: "", load: "" });
+        updateEditingState({
+          _id: "",
+          title: "",
+          load: "",
+          reps: "",
+        });
+      }
+      return;
+    }
+    //Make POST request
     const response = await fetch("/api/workouts", {
       method: "POST",
       body: JSON.stringify(workoutData),
@@ -35,7 +78,9 @@ const WorkoutForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="create">
-      <h3>Add a new workout</h3>
+      <h3>
+        {editingState._id ? `Edit ${editingState.title}` : "Add a new workout"}
+      </h3>
       <label htmlFor="title">Exercise Title</label>
       <input
         type="text"
@@ -75,7 +120,7 @@ const WorkoutForm = () => {
         }
         value={workoutData.reps}
       />
-      <button type="submit">Add Workout</button>
+      <button type="submit">{isEditing ? "Update" : "Add"} Workout</button>
       {error && <p className="error">{error.errorMessage}</p>}
     </form>
   );

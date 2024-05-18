@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useWorkoutsContext from "../hooks/useWorkoutsContext";
 
 //Components
@@ -6,9 +6,17 @@ import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
 
 function Home() {
-  // const [workouts, setWorkouts] = useState(null);
-
   const { workouts, dispatch } = useWorkoutsContext();
+  const [editing, setEditing] = useState({
+    _id: "",
+    title: "",
+    load: "",
+    reps: "",
+  });
+
+  const updateEditingState = (workout) => {
+    setEditing(workout);
+  };
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -27,10 +35,20 @@ function Home() {
       <div className="workouts">
         {workouts &&
           workouts.map((workout) => {
-            return <WorkoutDetails key={workout._id} workout={workout} />;
+            return (
+              <WorkoutDetails
+                key={workout._id}
+                workout={workout}
+                updateEditingState={updateEditingState}
+                editingState={editing}
+              />
+            );
           })}
       </div>
-      <WorkoutForm />
+      <WorkoutForm
+        editingState={editing}
+        updateEditingState={updateEditingState}
+      />
     </div>
   );
 }
