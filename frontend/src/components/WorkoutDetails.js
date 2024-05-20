@@ -3,8 +3,9 @@ import { format } from "date-fns";
 
 const WorkoutDetails = ({ workout, editingState, updateEditingState }) => {
   const { dispatch } = useWorkoutsContext();
-  const isDisabled =
-    editingState._id !== "" && editingState._id !== workout._id;
+  const isDisabled = Boolean(
+    editingState && editingState._id !== "" && editingState._id !== workout._id
+  );
 
   const handleDelete = async () => {
     if (!isDisabled) {
@@ -42,7 +43,7 @@ const WorkoutDetails = ({ workout, editingState, updateEditingState }) => {
       <span onClick={handleDelete} className="material-symbols-outlined delete">
         Delete
       </span>
-      {editingState._id === workout._id ? (
+      {editingState && editingState._id === workout._id ? (
         <span
           onClick={handleCancel}
           className="material-symbols-outlined close"

@@ -79,7 +79,9 @@ const WorkoutForm = ({ editingState, updateEditingState }) => {
   return (
     <form onSubmit={handleSubmit} className="create">
       <h3>
-        {editingState._id ? `Edit ${editingState.title}` : "Add a new workout"}
+        {editingState && editingState._id
+          ? `Edit ${editingState.title}`
+          : "Add a new workout"}
       </h3>
       <label htmlFor="title">Exercise Title</label>
       <input
