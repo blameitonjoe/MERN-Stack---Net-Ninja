@@ -9,7 +9,7 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Home key={1} />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </BrowserRouter>

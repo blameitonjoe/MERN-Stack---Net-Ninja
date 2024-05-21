@@ -90,8 +90,8 @@ const WorkoutForm = ({ editingState, updateEditingState }) => {
         id="title"
         className={error && error.emptyFields.includes("title") ? "error" : ""}
         onChange={(e) =>
-          setWorkoutData((x) => {
-            return { ...workoutData, title: e.target.value };
+          setWorkoutData((currWorkoutData) => {
+            return { ...currWorkoutData, title: e.target.value };
           })
         }
         value={workoutData.title}
