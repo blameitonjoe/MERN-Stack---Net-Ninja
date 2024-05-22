@@ -4,8 +4,24 @@ const mongoose = require("mongoose");
 //GET All
 const getAllWorkouts = async (req, res) => {
   try {
-    const allWorkouts = await Workout.find().sort({ createdAt: -1 });
-    res.status(200).json(allWorkouts);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const totalWorkouts = await Workout.countDocuments();
+
+    const foundWorkouts = await Workout.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      total: totalWorkouts,
+      page: page,
+      totalPages: Math.ceil(totalWorkouts / limit),
+      workouts: foundWorkouts,
+      limit: limit,
+    });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });

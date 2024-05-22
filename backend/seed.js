@@ -59,7 +59,7 @@ const createDoc = () => {
   };
 };
 const seedDB = async () => {
-  const newWorkouts = Array.from({ length: 10 }, (_, index) => createDoc());
+  const newWorkouts = Array.from({ length: 60 }, (_, index) => createDoc());
 
   try {
     const deletedWorkouts = await Workout.deleteMany({});

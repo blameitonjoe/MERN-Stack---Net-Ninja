@@ -37,21 +37,19 @@ header a {
 }
 
 /* homepage */
-/* .home {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
-} */
-.home {
+
+.home  {
+  display: flex;
+  flex-direction: column;
+}
+.home main {
   display: flex;
   gap: 10%;
   margin: 0 20px;
-  height: 100vh;
 }
 .workouts {
   flex-grow: 1;
   min-width: 200px;
-  height: 100vh;
 }
 form.create {
   min-width: 185px;
@@ -157,6 +155,47 @@ p.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+
+/*Pagination*/
+ul.pagination {
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  list-style: none;
+  gap: 10px;
+  margin-bottom: 100px;
+  align-items: baseline;
+}
+ul.pagination li{
+  font-size: 3em;
+  font-weight: bold; 
+}
+ul.pagination li.arrow{
+  font-weight: normal; 
+}
+
+ul.pagination li button{
+  display: inline;
+  color: var(--primary);
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+ 
+}
+ul.pagination li button:hover{
+  text-decoration: underline;
+}
+
+ul.pagination li.ellipsis {
+  font-weight: normal;
+  font-size: 2rem;
+  position: relative;
+  bottom: 5px;
 }
 
 @media (max-width: 500px) {

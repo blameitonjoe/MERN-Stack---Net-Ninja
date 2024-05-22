@@ -6,7 +6,11 @@ export const workoutsReducer = (state, action) => {
   switch (action.type) {
     case "SET_WORKOUTS":
       return {
-        workouts: action.payload,
+        totalWorkouts: action.payload.total,
+        page: action.payload.page,
+        totalPages: action.payload.totalPages,
+        workouts: action.payload.workouts,
+        limit: action.payload.limit,
       };
     case "CREATE_WORKOUT":
       return {
