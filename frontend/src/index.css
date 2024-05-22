@@ -122,11 +122,15 @@ form.create {
 }
 
 /* new workout form */
+form.create fieldset{
+  border: none;
+  padding: 0;
+}
 
-label, input {
+form.create label,form.create input {
   display: block;
 }
-input {
+form.create input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -135,7 +139,7 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
-form button {
+form.create button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -145,7 +149,7 @@ form button {
   cursor: pointer;
   display: block;
 }
-p.error {
+form.create p.error {
   padding: 10px;
   background: #ffefef;
   border: 1px dotted var(--error);
@@ -153,7 +157,7 @@ p.error {
   border-radius: 4px;
   margin: 20px 0;
 }
-input.error {
+form.create input.error {
   border: 1px solid var(--error);
 }
 
@@ -199,14 +203,15 @@ ul.pagination li.ellipsis {
 }
 
 @media (max-width: 500px) {
+
   .pages{
     padding: 0;
   }
-  .home{
+  .home main{
+    padding: 0;
     flex-wrap: nowrap;
     flex-direction: column;
     margin: 0;
-    height: 100vh;
     gap: 0;
   }
   .home>*{
@@ -216,15 +221,37 @@ ul.pagination li.ellipsis {
     order: 2;
     height: auto;
     flex-grow: unset;
+    padding: 0 20px;
   }
   form.create {
     order: 1;
-    height: 380px;
+    height: fit-content;
     padding: 25px 20px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 
   }
+  form.create h3{
+    margin-top: 0;
+  }
+  form.create .workout-numbers{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
   form.create button{
     margin: 0 auto;
   }
+  ul.pagination{
+    gap: 5px;
+  }
+  ul.pagination li{
+    font-size: 1.8em;
+  }
+  ul.pagination li.ellipsis {
+    font-size: 1em;
+    bottom: 2px;
+    }
+  
+
+
 }

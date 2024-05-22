@@ -96,32 +96,42 @@ const WorkoutForm = ({ editingState, updateEditingState }) => {
         }
         value={workoutData.title}
       />
-      <label htmlFor="load">Load (kg)</label>
-      <input
-        type="number"
-        name="load"
-        id="load"
-        className={error && error.emptyFields.includes("load") ? "error" : ""}
-        onChange={(e) =>
-          setWorkoutData((x) => {
-            return { ...workoutData, load: e.target.value };
-          })
-        }
-        value={workoutData.load}
-      />
-      <label htmlFor="reps">Reps</label>
-      <input
-        type="number"
-        name="reps"
-        id="reps"
-        className={error && error.emptyFields.includes("reps") ? "error" : ""}
-        onChange={(e) =>
-          setWorkoutData((x) => {
-            return { ...workoutData, reps: e.target.value };
-          })
-        }
-        value={workoutData.reps}
-      />
+      <div className="workout-numbers">
+        <fieldset>
+          <label htmlFor="load">Load (kg)</label>
+          <input
+            type="number"
+            name="load"
+            id="load"
+            className={
+              error && error.emptyFields.includes("load") ? "error" : ""
+            }
+            onChange={(e) =>
+              setWorkoutData((x) => {
+                return { ...workoutData, load: e.target.value };
+              })
+            }
+            value={workoutData.load}
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="reps">Reps</label>
+          <input
+            type="number"
+            name="reps"
+            id="reps"
+            className={
+              error && error.emptyFields.includes("reps") ? "error" : ""
+            }
+            onChange={(e) =>
+              setWorkoutData((x) => {
+                return { ...workoutData, reps: e.target.value };
+              })
+            }
+            value={workoutData.reps}
+          />
+        </fieldset>
+      </div>
       <button type="submit">{isEditing ? "Update" : "Add"} Workout</button>
       {error && <p className="error">{error.errorMessage}</p>}
     </form>
